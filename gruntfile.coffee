@@ -4,6 +4,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-browserify'
   grunt.loadNpmTasks 'grunt-este-watch'
   grunt.loadNpmTasks 'grunt-contrib-connect'
+  grunt.loadNpmTasks 'grunt-typescript'
   grunt.initConfig
     bower_concat:
       all:
@@ -13,19 +14,28 @@ module.exports = (grunt) ->
         bowerOptions:
           relative: false
 
-    browserify:
+    typescript:
       app:
+        src: ['app/ts/index.ts']
+        dest: 'public/ts.js'
+        options:
+          module: 'commonjs'
+          target: 'es5'
+          sourceMap: true
+
+    browserify:
+      coffee:
         files:
-          'public/all.js': [
-            'app/initialize.coffee'
+          'public/cs.js': [
+            'app/coffee/initialize.coffee'
           ]
         options:
           transform: ['coffeeify']
-
+          sourceMap: true
       test:
         files:
           'test/assets/test.js': [
-            'test/initialize.coffee'
+            'test/coffee/initialize.coffee'
           ]
         options:
 
@@ -49,7 +59,8 @@ module.exports = (grunt) ->
           port: 8888
           base: 'public'
 
-  grunt.registerTask "build", ["bower_concat", "browserify"]
+  grunt.registerTask "build", ["bower_concat", "browserify:coffee", "typescript"]
+  grunt.registerTask "test-build", ["bower_concat", "browserify:coffee", "typescript"]
   grunt.registerTask "default", ["build"]
   grunt.registerTask "test", ["build", "mocha_phantomjs"]
   grunt.registerTask "server", ["connect", "esteWatch"]
