@@ -1,3 +1,4 @@
+/// <reference path="typings/tsd.d.ts" />
 //module Game {
 //    export class Main(){
 //        constructor(){
