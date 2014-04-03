@@ -5,6 +5,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-este-watch'
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-typescript'
+  grunt.loadNpmTasks 'grunt-coffeeify'
   grunt.initConfig
     bower_concat:
       all:
@@ -30,15 +31,16 @@ module.exports = (grunt) ->
             'app/coffee/initialize.coffee'
           ]
         options:
+          debug: true
           transform: ['coffeeify']
-          sourceMap: true
+
       test:
         files:
           'test/assets/test.js': [
-            'test/coffee/initialize.coffee'
+            'test/initialize.coffee'
           ]
         options:
-
+          debug: true
           transform: ['coffeeify']
 
     mocha_phantomjs:
@@ -59,7 +61,7 @@ module.exports = (grunt) ->
           port: 8888
           base: 'public'
 
-  grunt.registerTask "build", ["bower_concat", "browserify:coffee", "typescript"]
+  grunt.registerTask "build", ["bower_concat", "browserify", "typescript"]
   grunt.registerTask "test-build", ["bower_concat", "browserify:coffee", "typescript"]
   grunt.registerTask "default", ["build"]
   grunt.registerTask "test", ["build", "mocha_phantomjs"]
