@@ -1,9 +1,10 @@
-# Client App Skeleton
+# App Skeleton
 
 web app skeleton
 
 ## Components
 
+- typescript
 - coffee-script
 - browserify
 - mocha-phantomjs
