@@ -1,2 +1,2 @@
-console.log("typescript");
+console.log("typescript2");
 //# sourceMappingURL=ts.js.map

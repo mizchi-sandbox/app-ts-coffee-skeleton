@@ -5,7 +5,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-este-watch'
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-typescript'
-  grunt.loadNpmTasks 'grunt-coffeeify'
   grunt.initConfig
     bower_concat:
       all:
@@ -53,7 +52,14 @@ module.exports = (grunt) ->
         dirs: ['app/**/', 'test/**/']
       coffee: (filepath) ->
         console.log filepath
-        ['build', 'test']
+        if /app/.test(filepath)
+          ['browserify:coffee']
+        else if /test/.test(filepath)
+          ['browserify:coffee', 'browserify:test', 'mocha_phantomjs']
+
+      ts: (filepath) ->
+        console.log filepath
+        ['typescript:app']
 
     connect:
       app:
@@ -65,4 +71,4 @@ module.exports = (grunt) ->
   grunt.registerTask "test-build", ["bower_concat", "browserify:coffee", "typescript"]
   grunt.registerTask "default", ["build"]
   grunt.registerTask "test", ["build", "mocha_phantomjs"]
-  grunt.registerTask "server", ["connect", "esteWatch"]
+  grunt.registerTask "server", ["build", "connect", "esteWatch"]
