@@ -1,9 +1,11 @@
-/// <reference path="typings/tsd.d.ts" />
-//module Game {
-//    export class Main(){
-//        constructor(){
-//            console.log("game start!");
-//        }
-//    }
-//}
-console.log("typescript2");
+/// <reference path="./typings/tsd.d.ts" />
+module A {
+    export class B {
+        constructor(){
+        }
+    }
+}
+
+jQuery(() => {
+    console.log("onload typescirpt");
+});
