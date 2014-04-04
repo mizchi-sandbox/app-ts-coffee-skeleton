@@ -12,21 +12,22 @@ web app skeleton
 ## Build
 
 ```
-npm install
-bower install
-grunt build
-grunt test
+$ npm install
+$ bower install
+$ tsd install
+$ grunt build
+$ grunt test
 ```
 
 ## Tasks
 
 ```
 # build app
-grunt build
+$ grunt build
 
 # run mocha-phantomjs
-grunt test
+$ grunt test
 
 # server with run test
-grunt server
+$ grunt server
 ```
